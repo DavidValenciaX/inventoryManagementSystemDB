@@ -42,7 +42,7 @@ CREATE TABLE users (
     confirmation_token_expiration TIMESTAMP,
     password_reset_token_hash VARCHAR(255),
     password_reset_token_expiration TIMESTAMP,
-    status_id INTEGER REFERENCES status_types(id),
+    status_id INTEGER NOT NULL REFERENCES status_types(id),
     profile_image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -99,7 +99,7 @@ CREATE TABLE products (
     description TEXT,
     unit_price DECIMAL(15, 2) NOT NULL,
     image_url VARCHAR(255),
-    category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     unit_of_measure_id INTEGER NOT NULL REFERENCES units_of_measure(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
