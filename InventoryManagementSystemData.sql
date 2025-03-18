@@ -1,23 +1,13 @@
 -- Insertar datos iniciales en status_categories
 INSERT INTO status_categories (name, description) VALUES
-('supplier', 'Estados de proveedores'),
 ('sales_order', 'Estados de órdenes de venta'),
 ('purchase_order', 'Estados de órdenes de compra'),
 ('purchase_order_product', 'Estados de productos en órdenes de compra'),
 ('return', 'Estados de devoluciones'),
-('user', 'Estados de usuarios'),
-('product', 'Estados de productos'),
-('category', 'Estados de categorías'),
-('customer', 'Estados de clientes'),
-('sales_order_product', 'Estados de productos en órdenes de venta');
+('user', 'Estados de usuarios');
 
 -- Insertar datos iniciales en status_types
 INSERT INTO status_types (name, category_id, description) VALUES
-
--- Supplier statuses
-('active', (SELECT id FROM status_categories WHERE name = 'supplier'), 'Proveedor activo'),
-('inactive', (SELECT id FROM status_categories WHERE name = 'supplier'), 'Proveedor inactivo'),
-('suspended', (SELECT id FROM status_categories WHERE name = 'supplier'), 'Proveedor suspendido'),
 
 -- sales_order status
 ('pending', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden recibida'),
@@ -32,12 +22,6 @@ INSERT INTO status_types (name, category_id, description) VALUES
 ('partial', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden parcialmente entregada'),
 ('delivered', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden entregada'),
 ('cancelled', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden cancelada'),
-
--- Purchase order product statuses
-('pending', (SELECT id FROM status_categories WHERE name = 'purchase_order_product'), 'Ítem pendiente'),
-('partial', (SELECT id FROM status_categories WHERE name = 'purchase_order_product'), 'Ítem parcialmente recibido'),
-('complete', (SELECT id FROM status_categories WHERE name = 'purchase_order_product'), 'Ítem completado'),
-('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_order_product'), 'Ítem rechazado'),
 
 -- Return statuses
 ('Return Requested', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución solicitada'),
@@ -59,38 +43,6 @@ INSERT INTO status_types (name, category_id, description) VALUES
 ('suspended', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario suspendido'),
 ('pending_confirmation', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario pendiente de confirmación'),
 ('locked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por seguridad'),
-
--- Product statuses
-('active', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto activo y disponible'),
-('inactive', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto inactivo'),
-('discontinued', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto descontinuado'),
-('out_of_stock', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto sin existencias'),
-('low_stock', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto con inventario bajo'),
-('backordered', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto con pedido pendiente'),
-('reserved', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto reservado'),
-('on_hold', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto en espera de aprobación'),
-('damaged', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto dañado'),
-('defective', (SELECT id FROM status_categories WHERE name = 'product'), 'Producto defectuoso'),
-
--- Category statuses
-('active', (SELECT id FROM status_categories WHERE name = 'category'), 'Categoría activa'),
-('inactive', (SELECT id FROM status_categories WHERE name = 'category'), 'Categoría inactiva'),
-('featured', (SELECT id FROM status_categories WHERE name = 'category'), 'Categoría destacada'),
-
--- Customer statuses
-('active', (SELECT id FROM status_categories WHERE name = 'customer'), 'Cliente activo'),
-('inactive', (SELECT id FROM status_categories WHERE name = 'customer'), 'Cliente inactivo'),
-('new', (SELECT id FROM status_categories WHERE name = 'customer'), 'Cliente nuevo'),
-('vip', (SELECT id FROM status_categories WHERE name = 'customer'), 'Cliente VIP'),
-('suspended', (SELECT id FROM status_categories WHERE name = 'customer'), 'Cliente suspendido'),
-
--- Order Product statuses
-('pending', (SELECT id FROM status_categories WHERE name = 'sales_order_product'), 'Producto pendiente de despacho'),
-('shipped', (SELECT id FROM status_categories WHERE name = 'sales_order_product'), 'Producto enviado'),
-('delivered', (SELECT id FROM status_categories WHERE name = 'sales_order_product'), 'Producto entregado'),
-('returned', (SELECT id FROM status_categories WHERE name = 'sales_order_product'), 'Producto devuelto'),
-('cancelled', (SELECT id FROM status_categories WHERE name = 'sales_order_product'), 'Producto cancelado'),
-('partial_return', (SELECT id FROM status_categories WHERE name = 'sales_order_product'), 'Devolución parcial del producto');
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES
