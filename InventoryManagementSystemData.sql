@@ -106,21 +106,6 @@ INSERT INTO transaction_types (name, description) VALUES
 ('Return Restocked', 'Productos aprobados y reintegrados al inventario'),
 ('Return Discarded', 'Productos descartados definitivamente');
 
--- Insertar monedas comunes
-INSERT INTO currencies (code, name, symbol) VALUES
-('USD', 'US Dollar', '$'),
-('EUR', 'Euro', '€'),
-('GBP', 'British Pound', '£'),
-('JPY', 'Japanese Yen', '¥'),
-('CAD', 'Canadian Dollar', 'C$'),
-('AUD', 'Australian Dollar', 'A$'),
-('COP', 'Colombian Peso', '$');
-
--- Insertar los tipos de descuento iniciales
-INSERT INTO discount_types (name, description) VALUES 
-('percentage', 'Discount as a percentage of the total amount'),
-('fixed_amount', 'Discount as a fixed monetary amount');
-
 -- Inicializar los tipos de medidas
 INSERT INTO measurement_types (name, description) VALUES
 ('Length', 'Units for measuring distances and dimensions'),
