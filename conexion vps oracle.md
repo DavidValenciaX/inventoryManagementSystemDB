@@ -45,6 +45,12 @@ sudo systemctl enable postgresql.service
 sudo systemctl start postgresql.service
 ```
 
+Verificar que el servicio esté corriendo
+
+```bash
+sudo systemctl status postgresql.service
+```
+
 Crear la base de datos
 
 -u: usuario
@@ -104,4 +110,77 @@ Listar tablas
 
 ```psql
 \dt
+```
+
+Asegurarse de que se pueden aceptar conexiones remotas
+
+```bash
+sudo nano /etc/postgresql/16/main/postgresql.conf
+```
+
+Asegurarse de que la opción listen_addresses esté configurada para aceptar conexiones externas, por ejemplo:
+
+```conf
+listen_addresses = '*'
+```
+
+Asegurarse de que se pueden aceptar conexiones remotas
+
+```bash
+sudo nano /etc/postgresql/16/main/pg_hba.conf
+```
+
+Añadir la siguiente línea al final del archivo:
+
+```conf
+host    all             all             0.0.0.0/0            scram-sha-256
+```
+
+Reiniciar el servicio de PostgreSQL
+
+```bash
+sudo systemctl restart postgresql.service
+```
+
+Si hay un firewall activo asegurarse de permitir el puerto de PostgreSQL (por defecto es el 5432)
+
+Primero asegurarse de tener instalado ufw
+
+```bash
+sudo apt update
+sudo apt install ufw
+```
+
+Permitir el puerto 5432
+
+```bash
+sudo ufw allow 5432/tcp
+```
+
+Después de configurar las reglas de firewall, hay que habilitar UFW
+
+```bash
+sudo ufw enable
+```
+
+Verificar que el puerto 5432 esté permitido
+
+```bash
+sudo ufw status
+```
+
+Es necesario crearle una contraseña al usuario postgres
+
+```bash
+sudo -u postgres psql
+```
+
+```sql
+ALTER USER postgres WITH PASSWORD 'passwordseguroparalabasededatosdeinventarios';
+```
+
+Salir de la consola de psql
+
+```sql
+\q
 ```
