@@ -6,6 +6,22 @@ conectarse pasando ubicación de la clave privada
 ssh -i "~/.ssh\ssh-key-2025-03-03.key" ubuntu@149.130.181.250
 ```
 
+configurar el archivo de configuración de ssh para no tener que pasar la clave privada cada vez que se conecte
+
+```bash
+nano ~/.ssh/config
+```
+
+config file
+
+```conf
+# Host example.com                                                                                                      
+#     User  username
+#     IdentityFile ~/.ssh/keys/example-key.key
+#     IdentitiesOnly yes
+#     Port 22                                 
+```
+
 Ya habiendo copiado la clave publica en el servidor se puede conectar sin el parámetro -i
 
 ```bash
@@ -21,15 +37,17 @@ icacls "C:\keys\oraclevps\ssh-key-2025-03-03.key" /grant:r David:F
 
 copiar carpeta de local a servidor
 
+-r: copiar de manera recursiva, es decir todos los archivos de la carpeta
+
 ```bash
-scp -r "C:\Users\David\Downloads\Programacion\Bases de datos\InventoryManagementSystemDataBase" ubuntu@149.130.181.250:~/
+scp -r "C:\Users\David\Downloads\Programacion\Bases de datos\inventoryProject" ubuntu@149.130.181.250:~/
 ```
 
 Darle permisos a la carpeta
 
 ```bash
 chmod 755 ~
-chmod 755 ~/InventoryManagementSystemDataBase/
+chmod 755 ~/inventoryProject/
 ```
 
 Instalar PostgreSQL
@@ -78,6 +96,24 @@ listar bases de datos
 \l
 ```
 
+conectarse a la base de datos
+
+```sql
+\c inventorydb
+```
+
+listar tablas de la base de datos
+
+```sql
+\dt
+```
+
+salir de la consola de psql
+
+```sql
+\q
+```
+
 eliminar base de datos si es necesario
 
 ```sql
@@ -97,19 +133,19 @@ Creacion de tablas en la base de datos a partir del archivo sql
 
 ```bash
 
-sudo -u postgres psql -d inventorydb -f ~/InventoryManagementSystemDataBase/InventoryManagementSystemDB.sql
+sudo -u postgres psql -d inventorydb -f ~/inventoryProject/InventoryManagementSystemDB.sql
 ```
 
 Insertar datos en la base de datos a partir del archivo sql
 
 ```bash
-sudo -u postgres psql -d inventorydb -f ~/InventoryManagementSystemDataBase/InventoryManagementSystemData.sql
+sudo -u postgres psql -d inventorydb -f ~/inventoryProject/InventoryManagementSystemData.sql
 ```
 
 Ejecutar trigger de update
 
 ```bash
-sudo -u postgres psql -d inventorydb -f ~/InventoryManagementSystemDataBase/update_timestamp_trigger.sql
+sudo -u postgres psql -d inventorydb -f ~/inventoryProject/update_timestamp_trigger.sql
 ```
 
 Conectar a la base de datos
