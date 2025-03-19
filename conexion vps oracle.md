@@ -57,7 +57,7 @@ Crear la base de datos
 createdb: comando para crear base de datos
 
 ```bash
-sudo -u postgres createdb inventorymanagementsystemdb
+sudo -u postgres createdb inventorydb
 ```
 
 Alternativa - Crear la base de datos desde la consola de psql
@@ -69,13 +69,25 @@ sudo -u postgres psql
 ```
 
 ```sql
-CREATE DATABASE inventorymanagementsystemdb;
+CREATE DATABASE inventorydb;
 ```
 
 listar bases de datos
 
 ```sql
 \l
+```
+
+eliminar base de datos si es necesario
+
+```sql
+sudo -u postgres dropdb inventorydb
+```
+
+revisar si hay conexiones activas
+
+```sql
+SELECT * FROM pg_stat_activity;
 ```
 
 Creacion de tablas en la base de datos a partir del archivo sql
@@ -85,25 +97,25 @@ Creacion de tablas en la base de datos a partir del archivo sql
 
 ```bash
 
-sudo -u postgres psql -d inventorymanagementsystemdb -f ~/InventoryManagementSystemDataBase/InventoryManagementSystemDB.sql
+sudo -u postgres psql -d inventorydb -f ~/InventoryManagementSystemDataBase/InventoryManagementSystemDB.sql
 ```
 
 Insertar datos en la base de datos a partir del archivo sql
 
 ```bash
-sudo -u postgres psql -d inventorymanagementsystemdb -f ~/InventoryManagementSystemDataBase/InventoryManagementSystemData.sql
+sudo -u postgres psql -d inventorydb -f ~/InventoryManagementSystemDataBase/InventoryManagementSystemData.sql
 ```
 
 Ejecutar trigger de update
 
 ```bash
-sudo -u postgres psql -d inventorymanagementsystemdb -f ~/InventoryManagementSystemDataBase/update_timestamp_trigger.sql
+sudo -u postgres psql -d inventorydb -f ~/InventoryManagementSystemDataBase/update_timestamp_trigger.sql
 ```
 
 Conectar a la base de datos
 
 ```bash
-sudo -u postgres psql -d inventorymanagementsystemdb
+sudo -u postgres psql -d inventorydb
 ```
 
 Listar tablas
