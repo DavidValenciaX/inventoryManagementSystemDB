@@ -42,7 +42,7 @@ INSERT INTO status_types (name, category_id, description) VALUES
 ('inactive', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario inactivo'),
 ('suspended', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario suspendido'),
 ('pending_confirmation', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario pendiente de confirmación'),
-('locked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por seguridad'),
+('locked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por seguridad');
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES
