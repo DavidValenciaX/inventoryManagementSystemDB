@@ -3,7 +3,6 @@ INSERT INTO status_categories (name, description) VALUES
 ('sales_order', 'Estados de órdenes de venta'),
 ('purchase_order', 'Estados de órdenes de compra'),
 ('purchase_order_product', 'Estados de productos en órdenes de compra'),
-('return', 'Estados de devoluciones'),
 ('user', 'Estados de usuarios');
 
 -- Insertar datos iniciales en status_types
@@ -22,20 +21,6 @@ INSERT INTO status_types (name, category_id, description) VALUES
 ('partial', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden parcialmente entregada'),
 ('delivered', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden entregada'),
 ('cancelled', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden cancelada'),
-
--- Return statuses
-('Return Requested', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución solicitada'),
-('Return Pending', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución pendiente'),
-('Return Processing', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución en proceso'),
-('Return Approved', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución aprobada'),
-('Return Completed', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución completada'),
-('Partial Return', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución parcial'),
-('Return Rejected', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución rechazada'),
-('Return Received', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución recibida'),
-('Return Quarantined', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución en cuarentena'),
-('Return Restocked', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución reintegrada al inventario'),
-('Return Discarded', (SELECT id FROM status_categories WHERE name = 'return'), 'Producto descartado por problemas de calidad'),
-('Return Sent', (SELECT id FROM status_categories WHERE name = 'return'), 'Devolución enviada'),
 
 -- User statuses
 ('active', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario activo'),

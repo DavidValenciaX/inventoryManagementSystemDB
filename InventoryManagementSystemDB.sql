@@ -103,10 +103,12 @@ CREATE TABLE products (
     unit_cost DECIMAL(15, 2) NOT NULL,
     supplier_id INTEGER NOT NULL REFERENCES suppliers(id),
     image_url VARCHAR(255),
+    barcode VARCHAR(50),
     category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     unit_of_measure_id INTEGER NOT NULL REFERENCES units_of_measure(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, barcode)
 );
 
 -- Tabla de ordenes/Pedidos
