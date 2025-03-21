@@ -120,6 +120,7 @@ CREATE TABLE sales_orders (
     status_id INTEGER REFERENCES status_types(id),
     subtotal DECIMAL(15, 2) NOT NULL DEFAULT 0,
     total_amount DECIMAL(15, 2) NOT NULL DEFAULT 0,
+    notes TEXT,
     order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -145,6 +146,7 @@ CREATE TABLE purchase_orders (
     status_id INTEGER REFERENCES status_types(id),
     subtotal DECIMAL(15, 2) NOT NULL DEFAULT 0,
     total_amount DECIMAL(15, 2) NOT NULL DEFAULT 0,
+    notes TEXT,
     purchase_order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
