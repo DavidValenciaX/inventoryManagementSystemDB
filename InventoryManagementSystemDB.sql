@@ -101,6 +101,7 @@ CREATE TABLE products (
     description TEXT,
     unit_price DECIMAL(15, 2) NOT NULL,
     unit_cost DECIMAL(15, 2) NOT NULL,
+    quantity DECIMAL(12, 2) NOT NULL DEFAULT 0,
     supplier_id INTEGER NOT NULL REFERENCES suppliers(id),
     image_url VARCHAR(255),
     barcode VARCHAR(50),
