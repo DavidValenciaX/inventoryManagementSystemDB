@@ -47,7 +47,8 @@ Darle permisos a la carpeta
 
 ```bash
 chmod 755 ~
-chmod 755 ~/inventoryProject/
+chmod 755 /home/projects/
+chmod 755 /home/projects/inventoryDB/
 ```
 
 Instalar PostgreSQL
@@ -133,7 +134,7 @@ Creacion de tablas en la base de datos a partir del archivo sql
 
 ```bash
 
-sudo -u postgres psql -d inventorydb -f ~/inventoryProject/InventoryManagementSystemDB.sql
+sudo -u postgres psql -d inventorydb -f ~/inventoryDB/InventoryManagementSystemDB.sql
 ```
 
 Insertar datos en la base de datos a partir del archivo sql
@@ -224,7 +225,7 @@ sudo -u postgres psql
 ```
 
 ```sql
-ALTER USER postgres WITH PASSWORD 'passwordseguroparalabasededatosdeinventarios';
+ALTER USER postgres WITH PASSWORD 'passwordseguro';
 ```
 
 Salir de la consola de psql

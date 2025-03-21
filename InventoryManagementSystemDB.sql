@@ -132,9 +132,6 @@ CREATE TABLE sales_order_products (
     product_id INTEGER NOT NULL REFERENCES products(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
     unit_price DECIMAL(15, 2) NOT NULL CHECK (unit_price >= 0),
-    returned_quantity INTEGER DEFAULT 0 CHECK (returned_quantity >= 0 AND returned_quantity <= quantity),
-    return_reason TEXT,
-    return_date TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (sales_order_id, product_id)
@@ -160,9 +157,6 @@ CREATE TABLE purchase_order_products (
     product_id INTEGER NOT NULL REFERENCES products(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
     unit_price DECIMAL(15, 2) NOT NULL CHECK (unit_price >= 0),
-    returned_quantity INTEGER DEFAULT 0 CHECK (returned_quantity >= 0 AND returned_quantity <= quantity),
-    return_reason TEXT,
-    return_date TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (purchase_order_id, product_id)
