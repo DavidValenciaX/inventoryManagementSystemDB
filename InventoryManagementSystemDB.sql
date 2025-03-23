@@ -87,7 +87,6 @@ CREATE TABLE suppliers (
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(100) NOT NULL,
     address VARCHAR(255) NOT NULL,
-    notes TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(email, user_id)
