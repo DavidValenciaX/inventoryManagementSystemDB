@@ -2,7 +2,6 @@
 INSERT INTO status_categories (name, description) VALUES
 ('sales_order', 'Estados de órdenes de venta'),
 ('purchase_order', 'Estados de órdenes de compra'),
-('purchase_order_product', 'Estados de productos en órdenes de compra'),
 ('user', 'Estados de usuarios');
 
 -- Insertar datos iniciales en status_types
