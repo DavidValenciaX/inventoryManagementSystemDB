@@ -31,18 +31,14 @@ INSERT INTO status_types (name, category_id, description) VALUES
 -- Añadir estados para devoluciones de ventas
 INSERT INTO status_types (name, category_id, description) VALUES
 -- Sales return statuses
-('pending', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución registrada pendiente de procesamiento'),
-('approved', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución aprobada en proceso'),
+('pending', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución registrada pendiente'),
 ('completed', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución completada y productos recibidos'),
-('rejected', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución rechazada'),
-('refunded', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Reembolso emitido al cliente');
+('rejected', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución rechazada');
 
 -- Añadir estados para devoluciones de compras
 INSERT INTO status_types (name, category_id, description) VALUES
 -- Purchase return statuses
-('pending', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución al proveedor pendiente de procesamiento'),
-('approved', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución aprobada por el proveedor'),
-('shipped', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Productos enviados al proveedor'),
+('pending', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución al proveedor pendiente'),
 ('completed', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución completada y recibida por el proveedor'),
 ('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución rechazada por el proveedor');
 
