@@ -4,43 +4,56 @@ INSERT INTO status_categories (name, description) VALUES
 ('purchase_order', 'Estados de órdenes de compra'),
 ('user', 'Estados de usuarios');
 
+-- Añadir categorías para devoluciones
+INSERT INTO status_categories (name, description) VALUES
+('sales_return', 'Estados de devoluciones de ventas'),
+('purchase_return', 'Estados de devoluciones de compras');
+
 -- Insertar datos iniciales en status_types
 INSERT INTO status_types (name, category_id, description) VALUES
 
 -- sales_order status
-('pending', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden recibida'),
-('processing', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'En preparación'),
-('shipped', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Enviado'),
-('delivered', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Entregado'),
-('cancelled', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Cancelado'),
+('pending', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden pendiente de confirmación'),
+('confirmed', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden confirmada'),
+('cancelled', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden cancelada'),
 
 -- Purchase order statuses
-('draft', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden en borrador'),
-('ordered', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden realizada'),
-('partial', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden parcialmente entregada'),
-('delivered', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden entregada'),
+('pending', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden pendiente de confirmación'),
+('confirmed', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden confirmada'),
 ('cancelled', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden cancelada'),
 
 -- User statuses
-('active', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario activo'),
-('inactive', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario inactivo'),
-('suspended', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario suspendido'),
-('pending_confirmation', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario pendiente de confirmación'),
-('locked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por seguridad');
+('active', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario con acceso completo al sistema'),
+('inactive', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario sin acceso actual al sistema'),
+('pending', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario pendiente de confirmación'),
+('blocked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por razones administrativas o de seguridad');
+
+-- Añadir estados para devoluciones de ventas
+INSERT INTO status_types (name, category_id, description) VALUES
+-- Sales return statuses
+('pending', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución registrada pendiente de procesamiento'),
+('approved', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución aprobada en proceso'),
+('completed', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución completada y productos recibidos'),
+('rejected', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución rechazada'),
+('refunded', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Reembolso emitido al cliente');
+
+-- Añadir estados para devoluciones de compras
+INSERT INTO status_types (name, category_id, description) VALUES
+-- Purchase return statuses
+('pending', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución al proveedor pendiente de procesamiento'),
+('approved', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución aprobada por el proveedor'),
+('shipped', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Productos enviados al proveedor'),
+('completed', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución completada y recibida por el proveedor'),
+('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución rechazada por el proveedor');
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES
-('purchase', 'Ingreso de inventario por compra a proveedores'),
-('sale', 'Salida de inventario por venta a clientes'),
+('purchase order', 'Ingreso de inventario por compra a proveedores'),
+('sales order', 'Salida de inventario por venta a clientes'),
+('sale return', 'Ajuste de inventario por devolución de orden de venta'),
+('purchase return', 'Ajuste de inventario por devolución a proveedor'),
 ('adjustment', 'Ajuste manual de inventario'),
-('return', 'Devolución de productos'),
-('donation', 'Donación de productos'),
-('loss', 'Pérdida de productos'),
-('Sale Return', 'Ajuste de inventario por devolución de orden de venta'),
-('Purchase Return', 'Ajuste de inventario por devolución a proveedor'),
-('Return Received', 'Productos devueltos recibidos en cuarentena'),
-('Return Restocked', 'Productos aprobados y reintegrados al inventario'),
-('Return Discarded', 'Productos descartados definitivamente');
+('loss', 'Pérdida de productos');
 
 -- Inicializar los tipos de medidas
 INSERT INTO measurement_types (name, description) VALUES
