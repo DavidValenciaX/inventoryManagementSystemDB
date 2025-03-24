@@ -2,12 +2,15 @@
 INSERT INTO status_categories (name, description) VALUES
 ('sales_order', 'Estados de órdenes de venta'),
 ('purchase_order', 'Estados de órdenes de compra'),
-('user', 'Estados de usuarios');
+('user', 'Estados de usuarios'),
 
 -- Añadir categorías para devoluciones
-INSERT INTO status_categories (name, description) VALUES
 ('sales_return', 'Estados de devoluciones de ventas'),
-('purchase_return', 'Estados de devoluciones de compras');
+('purchase_return', 'Estados de devoluciones de compras'),
+
+-- Añadir categorías para estados de productos devueltos
+('sales_return_product', 'Estados de productos devueltos por clientes'),
+('purchase_return_product', 'Estados de productos devueltos a proveedores');
 
 -- Insertar datos iniciales en status_types
 INSERT INTO status_types (name, category_id, description) VALUES
@@ -26,21 +29,27 @@ INSERT INTO status_types (name, category_id, description) VALUES
 ('active', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario con acceso completo al sistema'),
 ('inactive', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario sin acceso actual al sistema'),
 ('pending', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario pendiente de confirmación'),
-('blocked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por razones administrativas o de seguridad');
+('blocked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por razones administrativas o de seguridad'),
 
--- Añadir estados para devoluciones de ventas
-INSERT INTO status_types (name, category_id, description) VALUES
 -- Sales return statuses
 ('pending', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución registrada pendiente'),
 ('completed', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución completada y productos recibidos'),
-('rejected', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución rechazada');
+('rejected', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución rechazada'),
 
--- Añadir estados para devoluciones de compras
-INSERT INTO status_types (name, category_id, description) VALUES
 -- Purchase return statuses
 ('pending', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución al proveedor pendiente'),
 ('completed', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución completada y recibida por el proveedor'),
-('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución rechazada por el proveedor');
+('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución rechazada por el proveedor'),
+
+-- Estados para productos devueltos por clientes
+('under_review', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en revisión'),
+('accepted', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en buen estado para reintegro al inventario'),
+('damaged', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto dañado que no puede reintegrarse al inventario'),
+
+-- Estados para productos devueltos a proveedores
+('under_review', (SELECT id FROM status_categories WHERE name = 'purchase_return_product'), 'Producto en revisión por el proveedor'),
+('accepted', (SELECT id FROM status_categories WHERE name = 'purchase_return_product'), 'Producto aceptado por el proveedor'),
+('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_return_product'), 'Producto rechazado por el proveedor');
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES

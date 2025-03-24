@@ -178,6 +178,7 @@ CREATE TABLE sales_return_products (
     sales_return_id INTEGER NOT NULL REFERENCES sales_returns(id) ON DELETE CASCADE,
     product_id INTEGER NOT NULL REFERENCES products(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
+    status_id INTEGER REFERENCES status_types(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (sales_return_id, product_id)
@@ -201,6 +202,7 @@ CREATE TABLE purchase_return_products (
     purchase_return_id INTEGER NOT NULL REFERENCES purchase_returns(id) ON DELETE CASCADE,
     product_id INTEGER NOT NULL REFERENCES products(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
+    status_id INTEGER REFERENCES status_types(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (purchase_return_id, product_id)
