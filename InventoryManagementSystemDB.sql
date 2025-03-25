@@ -154,7 +154,7 @@ CREATE TABLE purchase_order_products (
     purchase_order_id INTEGER NOT NULL REFERENCES purchase_orders(id) ON DELETE CASCADE,
     product_id INTEGER NOT NULL REFERENCES products(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
-    unit_price DECIMAL(15, 2) NOT NULL CHECK (unit_price >= 0),
+    unit_cost DECIMAL(15, 2) NOT NULL CHECK (unit_cost >= 0),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (purchase_order_id, product_id)
