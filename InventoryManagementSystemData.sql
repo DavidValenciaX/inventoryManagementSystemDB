@@ -66,7 +66,8 @@ INSERT INTO measurement_types (name, description) VALUES
 ('Weight', 'Units for measuring mass'),
 ('Volume', 'Units for measuring volume of liquids or solids'),
 ('Area', 'Units for measuring surface area'),
-('Temperature', 'Units for measuring temperature');
+('Temperature', 'Units for measuring temperature'),
+('Count', 'Units for counting individual items or pieces');
 
 -- Inicializar unidades de medida comunes
 -- Length units
@@ -90,3 +91,11 @@ INSERT INTO units_of_measure (name, symbol, measurement_type_id) VALUES
 ('Milliliter', 'mL', (SELECT id FROM measurement_types WHERE name = 'Volume')),
 ('Gallon (US)', 'gal', (SELECT id FROM measurement_types WHERE name = 'Volume')),
 ('Fluid Ounce (US)', 'fl oz', (SELECT id FROM measurement_types WHERE name = 'Volume'));
+
+-- Unidades para conteo
+INSERT INTO units_of_measure (name, symbol, measurement_type_id) VALUES
+('Unit', 'unit', (SELECT id FROM measurement_types WHERE name = 'Count')),
+('Dozen', 'doz', (SELECT id FROM measurement_types WHERE name = 'Count')),
+('Pack', 'pack', (SELECT id FROM measurement_types WHERE name = 'Count')),
+('Case', 'case', (SELECT id FROM measurement_types WHERE name = 'Count')),
+('Pallet', 'pallet', (SELECT id FROM measurement_types WHERE name = 'Count'));
