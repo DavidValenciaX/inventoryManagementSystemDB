@@ -134,19 +134,19 @@ Creacion de tablas en la base de datos a partir del archivo sql
 
 ```bash
 
-sudo -u postgres psql -d inventorydb -f ~/inventoryDB/InventoryManagementSystemDB.sql
+sudo -u postgres psql -d inventorydb -f /home/projects/inventoryDB/InventoryManagementSystemDB.sql
 ```
 
 Insertar datos en la base de datos a partir del archivo sql
 
 ```bash
-sudo -u postgres psql -d inventorydb -f ~/inventoryProject/InventoryManagementSystemData.sql
+sudo -u postgres psql -d inventorydb -f /home/projects/inventoryDB/InventoryManagementSystemData.sql
 ```
 
 Ejecutar trigger de update
 
 ```bash
-sudo -u postgres psql -d inventorydb -f ~/inventoryProject/update_timestamp_trigger.sql
+sudo -u postgres psql -d inventorydb -f /home/projects/inventoryDB/update_timestamp_trigger.sql
 ```
 
 Conectar a la base de datos
