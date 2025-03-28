@@ -4,10 +4,6 @@ INSERT INTO status_categories (name, description) VALUES
 ('purchase_order', 'Estados de órdenes de compra'),
 ('user', 'Estados de usuarios'),
 
--- Añadir categorías para devoluciones
-('sales_return', 'Estados de devoluciones de ventas'),
-('purchase_return', 'Estados de devoluciones de compras'),
-
 -- Añadir categorías para estados de productos devueltos
 ('sales_return_product', 'Estados de productos devueltos por clientes'),
 ('purchase_return_product', 'Estados de productos devueltos a proveedores');
@@ -18,28 +14,16 @@ INSERT INTO status_types (name, category_id, description) VALUES
 -- sales_order status
 ('pending', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden pendiente de confirmación'),
 ('confirmed', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden confirmada'),
-('cancelled', (SELECT id FROM status_categories WHERE name = 'sales_order'), 'Orden cancelada'),
 
 -- Purchase order statuses
 ('pending', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden pendiente de confirmación'),
 ('confirmed', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden confirmada'),
-('cancelled', (SELECT id FROM status_categories WHERE name = 'purchase_order'), 'Orden cancelada'),
 
 -- User statuses
 ('active', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario con acceso completo al sistema'),
 ('inactive', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario sin acceso actual al sistema'),
 ('pending', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario pendiente de confirmación'),
 ('blocked', (SELECT id FROM status_categories WHERE name = 'user'), 'Usuario bloqueado por razones administrativas o de seguridad'),
-
--- Sales return statuses
-('pending', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución registrada pendiente'),
-('completed', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución completada y productos recibidos'),
-('rejected', (SELECT id FROM status_categories WHERE name = 'sales_return'), 'Devolución rechazada'),
-
--- Purchase return statuses
-('pending', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución al proveedor pendiente'),
-('completed', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución completada y recibida por el proveedor'),
-('rejected', (SELECT id FROM status_categories WHERE name = 'purchase_return'), 'Devolución rechazada por el proveedor'),
 
 -- Estados para productos devueltos por clientes
 ('under_review', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en revisión'),
@@ -53,10 +37,14 @@ INSERT INTO status_types (name, category_id, description) VALUES
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES
-('purchase order', 'Ingreso de inventario por compra a proveedores'),
-('sales order', 'Salida de inventario por venta a clientes'),
+('confirmed purchase order', 'Ingreso de inventario por compra a proveedores'),
+('cancelled purchase order', 'Cancelación de orden de compra'),
+('confirmed sales order', 'Salida de inventario por venta a clientes'),
+('cancelled sales order', 'Cancelación de orden de venta'),
 ('sale return', 'Ajuste de inventario por devolución de orden de venta'),
-('purchase return', 'Ajuste de inventario por devolución a proveedor'),
+('cancelled sale return', 'Cancelación de devolución de venta'),
+('purchase return', 'Ajuste de inventario por devolución de orden de compra'),
+('cancelled purchase return', 'Cancelación de devolución de compra'),
 ('adjustment', 'Ajuste manual de inventario'),
 ('loss', 'Pérdida de productos');
 
@@ -66,7 +54,6 @@ INSERT INTO measurement_types (name, description) VALUES
 ('Weight', 'Units for measuring mass'),
 ('Volume', 'Units for measuring volume of liquids or solids'),
 ('Area', 'Units for measuring surface area'),
-('Temperature', 'Units for measuring temperature'),
 ('Count', 'Units for counting individual items or pieces');
 
 -- Inicializar unidades de medida comunes
@@ -91,6 +78,14 @@ INSERT INTO units_of_measure (name, symbol, measurement_type_id) VALUES
 ('Milliliter', 'mL', (SELECT id FROM measurement_types WHERE name = 'Volume')),
 ('Gallon (US)', 'gal', (SELECT id FROM measurement_types WHERE name = 'Volume')),
 ('Fluid Ounce (US)', 'fl oz', (SELECT id FROM measurement_types WHERE name = 'Volume'));
+
+-- Area units
+INSERT INTO units_of_measure (name, symbol, measurement_type_id) VALUES
+('Square Meter', 'm²', (SELECT id FROM measurement_types WHERE name = 'Area')),
+('Square Centimeter', 'cm²', (SELECT id FROM measurement_types WHERE name = 'Area')),
+('Square Millimeter', 'mm²', (SELECT id FROM measurement_types WHERE name = 'Area')),
+('Square Inch', 'in²', (SELECT id FROM measurement_types WHERE name = 'Area')),
+('Square Foot', 'ft²', (SELECT id FROM measurement_types WHERE name = 'Area'));
 
 -- Unidades para conteo
 INSERT INTO units_of_measure (name, symbol, measurement_type_id) VALUES

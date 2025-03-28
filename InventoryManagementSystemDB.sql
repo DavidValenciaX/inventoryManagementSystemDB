@@ -168,7 +168,6 @@ CREATE TABLE sales_returns (
     sales_order_id INTEGER NOT NULL REFERENCES sales_orders(id),
     return_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     notes TEXT,
-    status_id INTEGER REFERENCES status_types(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -192,7 +191,6 @@ CREATE TABLE purchase_returns (
     purchase_order_id INTEGER NOT NULL REFERENCES purchase_orders(id),
     return_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     notes TEXT,
-    status_id INTEGER REFERENCES status_types(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -225,8 +223,6 @@ CREATE TABLE inventory_transactions (
     product_id INTEGER NOT NULL REFERENCES products(id),
     quantity DECIMAL(12, 2) NOT NULL,
     transaction_type_id INTEGER NOT NULL REFERENCES transaction_types(id),
-    sales_order_product_id INTEGER REFERENCES sales_order_products(id),
-    purchase_order_product_id INTEGER REFERENCES purchase_order_products(id),
     previous_stock DECIMAL(12, 2) NOT NULL,
     new_stock DECIMAL(12, 2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

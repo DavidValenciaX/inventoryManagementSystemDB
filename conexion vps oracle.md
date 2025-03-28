@@ -182,7 +182,8 @@ sudo nano /etc/postgresql/16/main/pg_hba.conf
 Añadir la siguiente línea al final del archivo:
 
 ```conf
-host    all             all             0.0.0.0/0            scram-sha-256
+host    all             all             0.0.0.0/0            md5
+host    all             all             ::0/0            md5
 ```
 
 Reiniciar el servicio de PostgreSQL
