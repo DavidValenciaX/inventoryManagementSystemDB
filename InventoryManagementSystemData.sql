@@ -27,7 +27,7 @@ INSERT INTO status_types (name, category_id, description) VALUES
 -- Estados para productos devueltos por clientes
 ('under_review', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en revisión'),
 ('accepted', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en buen estado para reintegro al inventario'),
-('damaged', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto dañado que no puede reintegrarse al inventario'),
+('damaged', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto dañado que no puede reintegrarse al inventario');
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES
