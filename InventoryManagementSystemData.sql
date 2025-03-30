@@ -3,9 +3,10 @@ INSERT INTO status_categories (name, description) VALUES
 ('sales_order', 'Estados de órdenes de venta'),
 ('purchase_order', 'Estados de órdenes de compra'),
 ('user', 'Estados de usuarios'),
-
 -- Añadir categorías para estados de productos devueltos
-('sales_return_product', 'Estados de productos devueltos por clientes');
+('sales_return_product', 'Estados de productos devueltos por clientes'),
+-- Nueva categoría para notificaciones de IA
+('ai_notification', 'Estados de notificaciones generadas por IA');
 
 -- Insertar datos iniciales en status_types
 INSERT INTO status_types (name, category_id, description) VALUES
@@ -27,7 +28,12 @@ INSERT INTO status_types (name, category_id, description) VALUES
 -- Estados para productos devueltos por clientes
 ('under_review', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en revisión'),
 ('accepted', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto en buen estado para reintegro al inventario'),
-('damaged', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto dañado que no puede reintegrarse al inventario');
+('damaged', (SELECT id FROM status_categories WHERE name = 'sales_return_product'), 'Producto dañado que no puede reintegrarse al inventario'),
+
+-- Estados para notificaciones de IA
+('new', (SELECT id FROM status_categories WHERE name = 'ai_notification'), 'Notificación recién generada, aún no vista'),
+('read', (SELECT id FROM status_categories WHERE name = 'ai_notification'), 'Notificación vista por el usuario'),
+('dismissed', (SELECT id FROM status_categories WHERE name = 'ai_notification'), 'Notificación descartada por el usuario');
 
 -- Insertar los tipos de transacciones predefinidos
 INSERT INTO transaction_types (name, description) VALUES
