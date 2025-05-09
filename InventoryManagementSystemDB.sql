@@ -221,6 +221,7 @@ CREATE TABLE inventory_transactions (
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
     quantity DECIMAL(12, 2) NOT NULL,
+    transaction_date DATE NOT NULL DEFAULT CURRENT_DATE,
     transaction_type_id INTEGER NOT NULL REFERENCES transaction_types(id),
     previous_stock DECIMAL(12, 2) NOT NULL,
     new_stock DECIMAL(12, 2) NOT NULL,
