@@ -77,7 +77,7 @@ CREATE TABLE products (
     quantity DECIMAL(12, 2) NOT NULL DEFAULT 0,
     image_url VARCHAR(255),
     barcode VARCHAR(50),
-    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE RESTRICT,
     unit_of_measure_id INTEGER NOT NULL REFERENCES units_of_measure(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
